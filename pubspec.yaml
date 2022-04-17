@@ -1,0 +1,68 @@
+name: nuntium_news_app
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+
+dependencies:
+  http: ^0.13.4
+  shimmer: ^2.0.0
+  cached_network_image: ^3.2.0
+  flutter_native_splash: ^2.1.5
+  flutter:
+    sdk: flutter
+
+
+
+  cupertino_icons: ^1.0.2
+  flutter_lints: ^1.0.0
+
+dev_dependencies:
+  
+  flutter_test:
+    sdk: flutter
+
+
+flutter_native_splash:
+  color: '#475AD7'
+  image: 'assets/images/logo900.png'
+  android: true
+  ios: true
+
+
+  
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+
+
+
+
+  fonts:
+    - family: SFPRO
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-Bold.ttf
+        - asset: assets/fonts/SF-Pro-Display-Light.ttf
+        - asset: assets/fonts/SF-Pro-Display-Medium.ttf
+        - asset: assets/fonts/SF-Pro-Display-Regular.ttf
+
+    - family: CustomIcons
+      fonts:
+        - asset: assets/icons/CustomIcons.ttf
+
+    - family: CustomIcons2
+      fonts:
+        - asset: assets/icons/CustomIcons2.ttf
+
+    - family: CustomIcons3
+      fonts:
+        - asset: assets/icons/CustomIcons3.ttf
