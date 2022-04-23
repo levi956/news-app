@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nuntium_news_app/services/news_api.dart';
+import 'package:nuntium_news_app/services/api/news_api.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
 import 'package:nuntium_news_app/utils/widgets/category_card.dart';
 import 'package:nuntium_news_app/utils/widgets/top_news_card.dart';

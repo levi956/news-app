@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nuntium_news_app/pages/forgot_password.dart';
 import 'package:nuntium_news_app/pages/sign_up.dart';
+import 'package:nuntium_news_app/pages/wrapper.dart';
 import 'package:nuntium_news_app/utils/navigation/navigation.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
 import 'package:nuntium_news_app/utils/widgets/buttons.dart';
+import 'package:nuntium_news_app/utils/widgets/progress_indicator.dart';
 import 'package:nuntium_news_app/utils/widgets/textfield.dart';
 
+import '../services/authentication/authentication.dart';
 import '../utils/style/status_bar_color.dart';
 
 class SignIn extends StatefulWidget {
@@ -17,6 +21,8 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool _isVisible = true;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  User? get user => auth.currentUser;
 
   void _togglePasswordView() {
     setState(() {
@@ -99,7 +105,9 @@ class _SignInState extends State<SignIn> {
                   child: PurpleButton(
                       text: 'Sign In',
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {}
+                        if (_formKey.currentState!.validate()) {
+                          login();
+                        }
                       },
                       buttonColor: purplePrimary),
                 ),
@@ -153,5 +161,14 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
+  }
+
+  login() async {
+    showLoader(context);
+    await Auth().signIn(_email.text.trim(), _password.text.trim());
+    pop(context);
+    if (user != null) {
+      pushToAndClearStack(context, const Wrapper());
+    }
   }
 }

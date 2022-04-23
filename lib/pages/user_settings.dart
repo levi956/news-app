@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nuntium_news_app/pages/change_password_page.dart';
+import 'package:nuntium_news_app/pages/onboarding.dart';
 import 'package:nuntium_news_app/utils/navigation/navigation.dart';
 import 'package:nuntium_news_app/utils/style/custom_icons_icons.dart';
 import 'package:nuntium_news_app/utils/widgets/user_settings_listtile.dart';
 
+import '../services/authentication/authentication.dart';
 import '../utils/style/color_constant.dart';
 import '../utils/style/status_bar_color.dart';
 
@@ -16,6 +19,7 @@ class UserSettings extends StatefulWidget {
 }
 
 class _UserSettingsState extends State<UserSettings> {
+  User? get user => FirebaseAuth.instance.currentUser;
   // notification alert dialog
   bool _isActive = false;
   @override
@@ -37,14 +41,14 @@ class _UserSettingsState extends State<UserSettings> {
             ),
             const SizedBox(height: 30),
             Text(
-              'Eren Turkman',
+              user!.displayName!,
               style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: blackPrimary,
                   fontSize: 17),
             ),
             Text(
-              'erenturkman@gmail.com',
+              user!.email!,
               style: TextStyle(
                   fontWeight: FontWeight.w300,
                   color: greyPrimary,
@@ -98,7 +102,7 @@ class _UserSettingsState extends State<UserSettings> {
               trailing: IconButton(
                 iconSize: 18,
                 color: greyDarker,
-                onPressed: () {},
+                onPressed: () => signOut(),
                 icon: const Icon(CustomIcons2.signout),
               ),
             ),
@@ -106,5 +110,10 @@ class _UserSettingsState extends State<UserSettings> {
         ),
       ),
     );
+  }
+
+  signOut() {
+    Auth().signOut();
+    pushToAndClearStack(context, const Onboarding());
   }
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "719430910558",
+    "project_id": "nuntium-b2008",
+    "storage_bucket": "nuntium-b2008.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719430910558:android:419e6fc8707b32f6e86acf",
+        "android_client_info": {
+          "package_name": "com.example.nuntium_news_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719430910558-pid0im2pdhpmmticrgftk873aoquhttc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnE41MYmEWmZnTPvNVWpfmQbe2ZF9SMwU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719430910558-pid0im2pdhpmmticrgftk873aoquhttc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

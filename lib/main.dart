@@ -1,21 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:nuntium_news_app/pages/onboarding.dart';
-import 'package:nuntium_news_app/pages/wrapper.dart';
+import 'package:nuntium_news_app/services/authentication/authentication_state.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
-
-// to do
-// - create content for remaining tab bars
-
-// - logic for sign in & sign up (validate & hidden)
-// - include firebase in both platfroms apps
-// - write stream for auth changes
-// - write methods for login and sign up
-// - write method for forget password by email
-// - write method for setter for username from the "user" object
-// - think about loading indicator
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -25,7 +16,8 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Nuntium',
-      home: Onboarding(),
+      home: AuthState(),
     );
   }
 }
+// - getting errors becuase of no headers

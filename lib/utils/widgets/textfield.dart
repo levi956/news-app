@@ -14,6 +14,7 @@ Center textField(
       width: 336.84,
       margin: const EdgeInsets.all(10),
       child: TextFormField(
+        autocorrect: false,
         obscureText: isHidden,
         cursorColor: greyPrimary,
         controller: fieldController,

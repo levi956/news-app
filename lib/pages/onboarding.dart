@@ -66,7 +66,7 @@ class _OnboardingState extends State<Onboarding> {
                 });
 
                 Future.delayed(
-                  const Duration(seconds: 4),
+                  const Duration(seconds: 2),
                   () {
                     setState(() {
                       _isLoading = false;
