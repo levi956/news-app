@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:nuntium_news_app/pages/articles_web_page.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
 import 'package:nuntium_news_app/utils/style/custom_icons_icons.dart';
 
@@ -33,6 +34,26 @@ class ArticlePage extends StatelessWidget {
                     icon: const Icon(Icons.arrow_back),
                   ),
                   const Spacer(),
+                  InkWell(
+                    onTap: () => pushTo(context, ArticlesWeb(news: news)),
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 15),
+                      width: 81,
+                      height: 32,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: purplePrimary),
+                      child: Center(
+                        child: Text(
+                          'Web View',
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: backgroundWhite,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                  ),
                   IconButton(
                     iconSize: 19,
                     color: greyPrimary,

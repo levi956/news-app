@@ -16,6 +16,7 @@ dependencies:
   firebase_core: ^1.14.1
   firebase_auth: ^3.3.14
   fluttertoast: ^8.0.9
+  webview_flutter: ^3.0.2
   
   flutter:
     sdk: flutter

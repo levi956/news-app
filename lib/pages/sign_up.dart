@@ -143,7 +143,7 @@ class _SignInState extends State<SignUp> {
                       text: 'Sign Up',
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          signUp();
+                          _signUp();
                         }
                       },
                       buttonColor: purplePrimary),
@@ -183,7 +183,7 @@ class _SignInState extends State<SignUp> {
     );
   }
 
-  signUp() async {
+  _signUp() async {
     showLoader(context);
     await Auth().signUp(
       _email.text.trim(),

@@ -20,4 +20,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// - getting errors becuase of no headers
+// - getting errors because of no headers
+// - implement web view for more news content 

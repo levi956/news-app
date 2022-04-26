@@ -106,7 +106,7 @@ class _SignInState extends State<SignIn> {
                       text: 'Sign In',
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          login();
+                          _login();
                         }
                       },
                       buttonColor: purplePrimary),
@@ -163,7 +163,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  login() async {
+  _login() async {
     showLoader(context);
     await Auth().signIn(_email.text.trim(), _password.text.trim());
     pop(context);
