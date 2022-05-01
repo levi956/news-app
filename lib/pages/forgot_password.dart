@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nuntium_news_app/utils/navigation/navigation.dart';
 import 'package:nuntium_news_app/utils/widgets/bottom_sheet.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/dark_theme_provider.dart';
 import '../services/authentication/authentication.dart';
 import '../utils/style/color_constant.dart';
 import '../utils/style/status_bar_color.dart';
@@ -25,10 +27,18 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   final _email = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    setStatusBarColor(color: BarColor.black);
+    //
+
+    // (utils)
+    // provider bool value for theme preference
+    final _themeChange = Provider.of<DarkThemeProvider>(context);
+    _themeChange.darkTheme
+        ? setStatusBarColor(color: BarColor.white)
+        : setStatusBarColor(color: BarColor.black);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: backgroundWhite,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.only(top: 70),
         child: Container(
@@ -42,7 +52,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   'Forgot Password 🤔',
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: blackPrimary,
+                      color: Theme.of(context).primaryColorDark,
                       fontSize: 24),
                 ),
                 const SizedBox(height: 10),
@@ -51,12 +61,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   style: TextStyle(
                       height: 1.5,
                       fontWeight: FontWeight.w300,
-                      color: greyPrimary,
+                      color: Theme.of(context).primaryColorLight,
                       fontSize: 16),
                 ),
                 const SizedBox(height: 10),
                 textField(
                   label: 'Email Address',
+                  context: context,
                   isHidden: false,
                   fieldController: _email,
                   validator: (value) {
@@ -68,7 +79,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     }
                     return null;
                   },
-                  iconLabel: Icon(Icons.email, color: greyPrimary),
+                  iconLabel: Icon(
+                    Icons.email,
+                    color: Theme.of(context).primaryColorLight,
+                  ),
                 ),
                 const SizedBox(height: 7),
                 Center(
@@ -89,7 +103,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     Text(
                       'Remeber the password?',
                       style: TextStyle(
-                          color: blackLighter,
+                          color: _themeChange.darkTheme
+                              ? backgroundWhite
+                              : blackLighter,
                           fontSize: 16.0,
                           fontWeight: FontWeight.w500),
                     ),
@@ -100,7 +116,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         child: Text(
                           'Try again',
                           style: TextStyle(
-                              color: blackPrimary,
+                              color: Theme.of(context).primaryColorDark,
                               fontSize: 15,
                               fontWeight: FontWeight.w500),
                         ),

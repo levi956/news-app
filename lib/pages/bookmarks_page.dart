@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../utils/style/color_constant.dart';
+import '../provider/dark_theme_provider.dart';
 import '../utils/style/status_bar_color.dart';
 
 class BookMarks extends StatelessWidget {
@@ -8,11 +9,14 @@ class BookMarks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setStatusBarColor(color: BarColor.black);
+    final _themeChange = Provider.of<DarkThemeProvider>(context);
+    _themeChange.darkTheme
+        ? setStatusBarColor(color: BarColor.white)
+        : setStatusBarColor(color: BarColor.black);
     return Padding(
       padding: const EdgeInsets.only(top: 70),
       child: Container(
-        color: backgroundWhite,
+        color: Theme.of(context).scaffoldBackgroundColor,
         width: double.maxFinite,
         margin: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
@@ -22,7 +26,7 @@ class BookMarks extends StatelessWidget {
               'Bookmarks',
               style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  color: blackPrimary,
+                  color: Theme.of(context).primaryColorDark,
                   fontSize: 24),
             ),
             const SizedBox(height: 10),
@@ -30,7 +34,7 @@ class BookMarks extends StatelessWidget {
               'Saved Articles to the library',
               style: TextStyle(
                   fontWeight: FontWeight.w300,
-                  color: greyPrimary,
+                  color: Theme.of(context).primaryColorLight,
                   fontSize: 16),
             ),
             const SizedBox(height: 200),
@@ -42,7 +46,7 @@ class BookMarks extends StatelessWidget {
                   image: AssetImage('assets/images/noBookmark.png'),
                 ),
                 radius: 33,
-                backgroundColor: greyishPurple,
+                backgroundColor: Theme.of(context).primaryColorDark,
               ),
             ),
             const SizedBox(height: 10),
@@ -52,7 +56,7 @@ class BookMarks extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
-                    color: blackPrimary,
+                    color: Theme.of(context).primaryColorLight,
                     fontSize: 16),
               ),
             )

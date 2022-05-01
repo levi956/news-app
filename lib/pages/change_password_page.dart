@@ -3,7 +3,9 @@ import 'package:nuntium_news_app/utils/navigation/navigation.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
 import 'package:nuntium_news_app/utils/widgets/buttons.dart';
 import 'package:nuntium_news_app/utils/widgets/textfield.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/dark_theme_provider.dart';
 import '../utils/style/status_bar_color.dart';
 
 class ChanagePassword extends StatefulWidget {
@@ -19,9 +21,13 @@ class _ChanagePasswordState extends State<ChanagePassword> {
   final _confirmNewPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    setStatusBarColor(color: BarColor.black);
+    // provider bool value for theme preference
+    final _themeChange = Provider.of<DarkThemeProvider>(context);
+    _themeChange.darkTheme
+        ? setStatusBarColor(color: BarColor.white)
+        : setStatusBarColor(color: BarColor.black);
     return Scaffold(
-      backgroundColor: backgroundWhite,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.only(top: 70, left: 10, right: 10),
         child: Column(
@@ -32,7 +38,7 @@ class _ChanagePasswordState extends State<ChanagePassword> {
                 // back button
                 IconButton(
                   iconSize: 19,
-                  color: greyDarker,
+                  color: Theme.of(context).primaryColorLight,
                   onPressed: () {
                     pop(context);
                   },
@@ -43,28 +49,40 @@ class _ChanagePasswordState extends State<ChanagePassword> {
                   'Change Password',
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: blackPrimary,
+                      color: Theme.of(context).primaryColorDark,
                       fontSize: 24),
                 ),
               ],
             ),
             textField(
               label: 'Current Password',
+              context: context,
               isHidden: false,
               fieldController: _currentPassword,
-              iconLabel: Icon(Icons.lock, color: greyPrimary),
+              iconLabel: Icon(
+                Icons.lock,
+                color: Theme.of(context).primaryColorLight,
+              ),
             ),
             textField(
               label: 'New Password',
+              context: context,
               isHidden: false,
               fieldController: _newPassword,
-              iconLabel: Icon(Icons.lock, color: greyPrimary),
+              iconLabel: Icon(
+                Icons.lock,
+                color: Theme.of(context).primaryColorLight,
+              ),
             ),
             textField(
               label: 'Repeat New Password',
+              context: context,
               isHidden: false,
               fieldController: _confirmNewPassword,
-              iconLabel: Icon(Icons.lock, color: greyPrimary),
+              iconLabel: Icon(
+                Icons.lock,
+                color: Theme.of(context).primaryColorLight,
+              ),
             ),
             const SizedBox(height: 15),
             PurpleButton(

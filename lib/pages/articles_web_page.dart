@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../models/news_model.dart';
+import '../provider/dark_theme_provider.dart';
 import '../utils/navigation/navigation.dart';
-import '../utils/style/color_constant.dart';
+import '../utils/style/status_bar_color.dart';
 
 class ArticlesWeb extends StatefulWidget {
   final News? news;
@@ -27,8 +29,13 @@ class _ArticlesWebState extends State<ArticlesWeb> {
 
   @override
   Widget build(BuildContext context) {
+    // provider bool value for theme preference
+    final _themeChange = Provider.of<DarkThemeProvider>(context);
+    _themeChange.darkTheme
+        ? setStatusBarColor(color: BarColor.white)
+        : setStatusBarColor(color: BarColor.black);
     return Scaffold(
-      backgroundColor: backgroundWhite,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.only(top: 60.0),
         child: Column(
@@ -36,7 +43,7 @@ class _ArticlesWebState extends State<ArticlesWeb> {
           children: [
             IconButton(
               iconSize: 19,
-              color: greyPrimary,
+              color: Theme.of(context).primaryColorLight,
               onPressed: () {
                 pop(context);
               },

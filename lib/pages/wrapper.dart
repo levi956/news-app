@@ -5,8 +5,11 @@ import 'package:nuntium_news_app/pages/categories_page.dart';
 import 'package:nuntium_news_app/pages/home_page.dart';
 import 'package:nuntium_news_app/pages/user_settings.dart';
 import 'package:nuntium_news_app/utils/style/custom_icons_icons.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/dark_theme_provider.dart';
 import '../utils/style/color_constant.dart';
+import '../utils/style/status_bar_color.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({Key? key}) : super(key: key);
@@ -25,11 +28,18 @@ class _WrapperState extends State<Wrapper> {
   ];
   @override
   Widget build(BuildContext context) {
+    // provider bool value for theme preference
+    final _themeChange = Provider.of<DarkThemeProvider>(context);
+    _themeChange.darkTheme
+        ? setStatusBarColor(color: BarColor.white)
+        : setStatusBarColor(color: BarColor.black);
     return Scaffold(
-      backgroundColor: backgroundWhite,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         selectedItemColor: purplePrimary,
         unselectedItemColor: greyPrimary,
+        iconSize: 14,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         currentIndex: _currentIndex,
@@ -55,7 +65,7 @@ class _WrapperState extends State<Wrapper> {
               icon: Icon(
                 CustomIcons.bookmarks,
               ),
-              label: 'tickets'),
+              label: 'bookmarks'),
           BottomNavigationBarItem(
               icon: Icon(
                 CustomIcons.profile,

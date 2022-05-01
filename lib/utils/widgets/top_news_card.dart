@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nuntium_news_app/pages/articles_page.dart';
+import 'package:nuntium_news_app/provider/dark_theme_provider.dart';
 import 'package:nuntium_news_app/utils/navigation/navigation.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/news_model.dart';
 
@@ -12,6 +14,8 @@ class TopNewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // provider bool value for theme preference
+    final _themeChange = Provider.of<DarkThemeProvider>(context);
     return InkWell(
       onTap: () {
         pushTo(context, ArticlePage(news: news));
@@ -19,7 +23,7 @@ class TopNewsCard extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(right: 20),
         decoration: BoxDecoration(
-          color: backgroundWhite,
+          color: Theme.of(context).scaffoldBackgroundColor,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,11 +38,11 @@ class TopNewsCard extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
-              color: greyLighter,
+              color: _themeChange.darkTheme ? blackLighter : greyLighter,
               child: Text(
                 news!.titleName,
                 style: TextStyle(
-                    color: blackPrimary,
+                    color: Theme.of(context).primaryColorDark,
                     fontSize: 12,
                     fontWeight: FontWeight.bold),
               ),
@@ -46,7 +50,7 @@ class TopNewsCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
               decoration: BoxDecoration(
-                color: greyLighter,
+                color: _themeChange.darkTheme ? blackLighter : greyLighter,
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(15),
                   bottomRight: Radius.circular(15),
@@ -57,7 +61,7 @@ class TopNewsCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,
                 style: TextStyle(
-                    color: blackPrimary,
+                    color: Theme.of(context).primaryColorDark,
                     fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),

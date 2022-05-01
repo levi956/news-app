@@ -3,8 +3,10 @@ import 'package:nuntium_news_app/services/api/news_api.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
 import 'package:nuntium_news_app/utils/widgets/category_card.dart';
 import 'package:nuntium_news_app/utils/widgets/top_news_card.dart';
+import 'package:provider/provider.dart';
 
 import '../models/news_model.dart';
+import '../provider/dark_theme_provider.dart';
 import '../utils/style/status_bar_color.dart';
 import '../utils/widgets/shimmer.dart';
 
@@ -56,7 +58,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    setStatusBarColor(color: BarColor.black);
+    // provider bool value for theme preference
+    final _themeChange = Provider.of<DarkThemeProvider>(context);
+    _themeChange.darkTheme
+        ? setStatusBarColor(color: BarColor.white)
+        : setStatusBarColor(color: BarColor.black);
     return FutureBuilder<List<News>>(
       future: future,
       builder: (context, snapshot) {
@@ -68,7 +74,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             child: Padding(
               padding: const EdgeInsets.only(top: 70),
               child: Container(
-                color: backgroundWhite,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 width: double.maxFinite,
                 margin: const EdgeInsets.only(left: 20),
                 child: Column(
@@ -78,7 +84,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       'Browse',
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          color: blackPrimary,
+                          color: Theme.of(context).primaryColorDark,
                           fontSize: 24),
                     ),
 
@@ -89,7 +95,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       'Discover things of the world',
                       style: TextStyle(
                           fontWeight: FontWeight.w300,
-                          color: greyPrimary,
+                          color: Theme.of(context).primaryColorLight,
                           fontSize: 16),
                     ),
 
@@ -104,7 +110,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           left: 0, right: 0, top: 0, bottom: 5),
                       controller: _tabController,
                       labelColor: backgroundWhite,
-                      unselectedLabelColor: greyPrimary,
+                      unselectedLabelColor: Theme.of(context).primaryColorLight,
                       indicatorColor: Colors.transparent,
                       tabs: [
                         Tab(
@@ -113,10 +119,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             width: 81,
                             height: 32,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: currentIndex == 0
-                                    ? purplePrimary
-                                    : greyLighter),
+                              borderRadius: BorderRadius.circular(20),
+                              color: currentIndex == 0
+                                  ? purplePrimary
+                                  : _themeChange.darkTheme
+                                      ? blackLighter
+                                      : greyLighter,
+                            ),
                             child: const Center(
                               child: Text(
                                 'General',
@@ -135,10 +144,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             width: 81,
                             height: 32.84,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: currentIndex == 1
-                                    ? purplePrimary
-                                    : greyLighter),
+                              borderRadius: BorderRadius.circular(20),
+                              color: currentIndex == 1
+                                  ? purplePrimary
+                                  : _themeChange.darkTheme
+                                      ? blackLighter
+                                      : greyLighter,
+                            ),
                             child: const Center(
                               child: Text(
                                 'Sports',
@@ -155,10 +167,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             width: 81,
                             height: 32.84,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: currentIndex == 2
-                                    ? purplePrimary
-                                    : greyLighter),
+                              borderRadius: BorderRadius.circular(20),
+                              color: currentIndex == 2
+                                  ? purplePrimary
+                                  : _themeChange.darkTheme
+                                      ? blackLighter
+                                      : greyLighter,
+                            ),
                             child: const Center(
                               child: Text(
                                 'Technology',
@@ -177,7 +192,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               borderRadius: BorderRadius.circular(20),
                               color: currentIndex == 3
                                   ? purplePrimary
-                                  : greyLighter,
+                                  : _themeChange.darkTheme
+                                      ? blackLighter
+                                      : greyLighter,
                             ),
                             child: const Center(
                               child: Text(
@@ -214,7 +231,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       'Top News',
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          color: blackPrimary,
+                          color: Theme.of(context).primaryColorDark,
                           fontSize: 24),
                     ),
 

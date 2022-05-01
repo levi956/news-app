@@ -13,7 +13,7 @@ class Auth {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (error) {
-      showErrorToast(error.toString());
+      return;
     }
   }
 

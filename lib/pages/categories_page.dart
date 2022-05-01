@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../utils/style/color_constant.dart';
+import 'package:provider/provider.dart';
+import '../provider/dark_theme_provider.dart';
 import '../utils/style/status_bar_color.dart';
 
 class Categories extends StatelessWidget {
@@ -7,11 +8,15 @@ class Categories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setStatusBarColor(color: BarColor.black);
+    // provider bool value for theme preference
+    final _themeChange = Provider.of<DarkThemeProvider>(context);
+    _themeChange.darkTheme
+        ? setStatusBarColor(color: BarColor.white)
+        : setStatusBarColor(color: BarColor.black);
     return Padding(
       padding: const EdgeInsets.only(top: 70),
       child: Container(
-        color: backgroundWhite,
+        color: Theme.of(context).scaffoldBackgroundColor,
         width: double.maxFinite,
         margin: const EdgeInsets.only(left: 20),
         child: Column(
@@ -21,7 +26,7 @@ class Categories extends StatelessWidget {
               'Categories',
               style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  color: blackPrimary,
+                  color: Theme.of(context).primaryColorDark,
                   fontSize: 24),
             ),
             const SizedBox(height: 10),
@@ -29,7 +34,7 @@ class Categories extends StatelessWidget {
               'Thousands of Articles in each category',
               style: TextStyle(
                   fontWeight: FontWeight.w300,
-                  color: greyPrimary,
+                  color: Theme.of(context).primaryColorLight,
                   fontSize: 16),
             ),
           ],

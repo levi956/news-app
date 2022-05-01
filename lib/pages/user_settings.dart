@@ -6,7 +6,9 @@ import 'package:nuntium_news_app/pages/onboarding.dart';
 import 'package:nuntium_news_app/utils/navigation/navigation.dart';
 import 'package:nuntium_news_app/utils/style/custom_icons_icons.dart';
 import 'package:nuntium_news_app/utils/widgets/user_settings_listtile.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/dark_theme_provider.dart';
 import '../services/authentication/authentication.dart';
 import '../utils/style/color_constant.dart';
 import '../utils/style/status_bar_color.dart';
@@ -24,7 +26,11 @@ class _UserSettingsState extends State<UserSettings> {
   bool _isActive = false;
   @override
   Widget build(BuildContext context) {
-    setStatusBarColor(color: BarColor.black);
+    // provider bool value for theme preference
+    final _themeChange = Provider.of<DarkThemeProvider>(context);
+    _themeChange.darkTheme
+        ? setStatusBarColor(color: BarColor.white)
+        : setStatusBarColor(color: BarColor.black);
     return Padding(
       padding: const EdgeInsets.only(top: 70),
       child: Container(
@@ -36,7 +42,7 @@ class _UserSettingsState extends State<UserSettings> {
               'Profile',
               style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  color: blackPrimary,
+                  color: Theme.of(context).primaryColorDark,
                   fontSize: 24),
             ),
             const SizedBox(height: 30),
@@ -44,14 +50,14 @@ class _UserSettingsState extends State<UserSettings> {
               user!.displayName!,
               style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  color: blackPrimary,
+                  color: Theme.of(context).primaryColorDark,
                   fontSize: 17),
             ),
             Text(
               user!.email!,
               style: TextStyle(
                   fontWeight: FontWeight.w300,
-                  color: greyPrimary,
+                  color: Theme.of(context).primaryColorLight,
                   fontSize: 14),
             ),
             const SizedBox(height: 30),
@@ -69,10 +75,20 @@ class _UserSettingsState extends State<UserSettings> {
               ),
             ),
             SettingListTile(
+              label: 'Dark Mode',
+              trailing: Switch.adaptive(
+                activeColor: purplePrimary,
+                value: _themeChange.darkTheme,
+                onChanged: (bool? value) {
+                  _themeChange.darkTheme = value!;
+                },
+              ),
+            ),
+            SettingListTile(
               label: 'Change Password',
               trailing: IconButton(
                 iconSize: 15,
-                color: greyDarker,
+                color: Theme.of(context).primaryColorDark,
                 onPressed: () {
                   pushTo(context, const ChanagePassword());
                 },
@@ -83,7 +99,7 @@ class _UserSettingsState extends State<UserSettings> {
               label: 'Privacy',
               trailing: IconButton(
                 iconSize: 15,
-                color: greyDarker,
+                color: Theme.of(context).primaryColorDark,
                 onPressed: () {},
                 icon: const Icon(CustomIcons2.forward),
               ),
@@ -92,7 +108,7 @@ class _UserSettingsState extends State<UserSettings> {
               label: 'Terms & Conditions',
               trailing: IconButton(
                 iconSize: 15,
-                color: greyDarker,
+                color: Theme.of(context).primaryColorDark,
                 onPressed: () {},
                 icon: const Icon(CustomIcons2.forward),
               ),
@@ -101,8 +117,8 @@ class _UserSettingsState extends State<UserSettings> {
               label: 'Sign Out',
               trailing: IconButton(
                 iconSize: 18,
-                color: greyDarker,
-                onPressed: () => signOut(),
+                color: Theme.of(context).primaryColorDark,
+                onPressed: () => _signOut(),
                 icon: const Icon(CustomIcons2.signout),
               ),
             ),
@@ -112,7 +128,7 @@ class _UserSettingsState extends State<UserSettings> {
     );
   }
 
-  signOut() {
+  _signOut() {
     Auth().signOut();
     pushToAndClearStack(context, const Onboarding());
   }

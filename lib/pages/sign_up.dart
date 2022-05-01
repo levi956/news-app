@@ -1,12 +1,16 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nuntium_news_app/pages/sign_in.dart';
 import 'package:nuntium_news_app/pages/wrapper.dart';
+import 'package:nuntium_news_app/provider/dark_theme_provider.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
 import 'package:nuntium_news_app/utils/style/custom_icons_icons.dart';
 import 'package:nuntium_news_app/utils/widgets/buttons.dart';
 import 'package:nuntium_news_app/utils/widgets/progress_indicator.dart';
 import 'package:nuntium_news_app/utils/widgets/textfield.dart';
+import 'package:provider/provider.dart';
 
 import '../services/authentication/authentication.dart';
 import '../utils/navigation/navigation.dart';
@@ -38,12 +42,24 @@ class _SignInState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    setStatusBarColor(color: BarColor.black);
+    //
+
+    // (utils)
+    // provider bool value for theme preference
+    final _themeChange = Provider.of<DarkThemeProvider>(context);
+    _themeChange.darkTheme
+        ? setStatusBarColor(color: BarColor.white)
+        : setStatusBarColor(color: BarColor.black);
+
+    // bottom padding
+    var bottom = MediaQuery.of(context).viewInsets.bottom;
+    bottom = max(min(bottom, 100), 0);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: backgroundWhite,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
-        padding: const EdgeInsets.only(top: 70),
+        padding: EdgeInsets.only(top: 70, bottom: bottom),
         child: Container(
           margin: const EdgeInsets.only(left: 20, right: 20),
           child: Form(
@@ -55,7 +71,7 @@ class _SignInState extends State<SignUp> {
                   'Welcome to Nuntium 👋',
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: blackPrimary,
+                      color: Theme.of(context).primaryColorDark,
                       fontSize: 24),
                 ),
                 const SizedBox(height: 10),
@@ -64,15 +80,19 @@ class _SignInState extends State<SignUp> {
                   style: TextStyle(
                       height: 1.5,
                       fontWeight: FontWeight.w300,
-                      color: greyPrimary,
+                      color: Theme.of(context).primaryColorLight,
                       fontSize: 16),
                 ),
                 const SizedBox(height: 30),
                 textField(
                   label: 'Username',
+                  context: context,
                   isHidden: false,
                   fieldController: _username,
-                  iconLabel: Icon(CustomIcons.profile, color: greyPrimary),
+                  iconLabel: Icon(
+                    CustomIcons.profile,
+                    color: Theme.of(context).primaryColorLight,
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your username';
@@ -82,9 +102,13 @@ class _SignInState extends State<SignUp> {
                 ),
                 textField(
                   label: 'Email Address',
+                  context: context,
                   isHidden: false,
                   fieldController: _email,
-                  iconLabel: Icon(Icons.email, color: greyPrimary),
+                  iconLabel: Icon(
+                    Icons.email,
+                    color: Theme.of(context).primaryColorLight,
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email address';
@@ -97,16 +121,20 @@ class _SignInState extends State<SignUp> {
                 ),
                 textField(
                   label: 'Password',
+                  context: context,
                   fieldController: _password,
                   iconSuffix: InkWell(
                     onTap: _togglePasswordView,
                     child: Icon(
                       _isVisible ? Icons.visibility : Icons.visibility_off,
-                      color: greyPrimary,
+                      color: Theme.of(context).primaryColorLight,
                     ),
                   ),
                   isHidden: _isVisible,
-                  iconLabel: Icon(Icons.lock, color: greyPrimary),
+                  iconLabel: Icon(
+                    Icons.lock,
+                    color: Theme.of(context).primaryColorLight,
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your password';
@@ -116,16 +144,20 @@ class _SignInState extends State<SignUp> {
                 ),
                 textField(
                   label: 'Repeat Password',
+                  context: context,
                   fieldController: _repeatPassword,
                   isHidden: _isVisible,
                   iconSuffix: InkWell(
                     onTap: _togglePasswordView,
                     child: Icon(
                       _isVisible ? Icons.visibility : Icons.visibility_off,
-                      color: greyPrimary,
+                      color: Theme.of(context).primaryColorLight,
                     ),
                   ),
-                  iconLabel: Icon(Icons.lock, color: greyPrimary),
+                  iconLabel: Icon(
+                    Icons.lock,
+                    color: Theme.of(context).primaryColorLight,
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please confirm your password';
@@ -156,7 +188,9 @@ class _SignInState extends State<SignUp> {
                     Text(
                       'Already have an account?',
                       style: TextStyle(
-                          color: blackLighter,
+                          color: _themeChange.darkTheme
+                              ? backgroundWhite
+                              : blackLighter,
                           fontSize: 16.0,
                           fontWeight: FontWeight.w500),
                     ),
@@ -167,7 +201,7 @@ class _SignInState extends State<SignUp> {
                       child: Text(
                         'Sign In',
                         style: TextStyle(
-                            color: blackPrimary,
+                            color: Theme.of(context).primaryColorLight,
                             fontSize: 15,
                             fontWeight: FontWeight.w500),
                       ),

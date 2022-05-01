@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:nuntium_news_app/pages/sign_in.dart';
 import 'package:nuntium_news_app/utils/navigation/navigation.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/dark_theme_provider.dart';
 import '../utils/style/status_bar_color.dart';
 
 class Onboarding extends StatefulWidget {
@@ -16,9 +18,14 @@ class _OnboardingState extends State<Onboarding> {
   bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
-    setStatusBarColor(color: BarColor.black);
+    final _themeChange = Provider.of<DarkThemeProvider>(context);
+
+    _themeChange.darkTheme
+        ? setStatusBarColor(color: BarColor.white)
+        : setStatusBarColor(color: BarColor.black);
+
     return Scaffold(
-      backgroundColor: backgroundWhite,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -36,7 +43,9 @@ class _OnboardingState extends State<Onboarding> {
           Text(
             'Nuntium',
             style: TextStyle(
-                fontWeight: FontWeight.w600, color: blackPrimary, fontSize: 25),
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).primaryColorDark,
+                fontSize: 25),
           ),
 
           //
@@ -48,7 +57,7 @@ class _OnboardingState extends State<Onboarding> {
               style: TextStyle(
                   height: 1.5,
                   fontWeight: FontWeight.w300,
-                  color: greyPrimary,
+                  color: Theme.of(context).primaryColorLight,
                   fontSize: 16),
             ),
           ),

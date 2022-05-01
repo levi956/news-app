@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:nuntium_news_app/pages/articles_web_page.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
 import 'package:nuntium_news_app/utils/style/custom_icons_icons.dart';
+import 'package:provider/provider.dart';
 
 import '../models/news_model.dart';
+import '../provider/dark_theme_provider.dart';
 import '../utils/navigation/navigation.dart';
+import '../utils/style/status_bar_color.dart';
 
 class ArticlePage extends StatelessWidget {
   final News? news;
@@ -13,8 +16,13 @@ class ArticlePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // provider bool value for theme preference
+    final _themeChange = Provider.of<DarkThemeProvider>(context);
+    _themeChange.darkTheme
+        ? setStatusBarColor(color: BarColor.white)
+        : setStatusBarColor(color: BarColor.black);
     return Scaffold(
-      backgroundColor: backgroundWhite,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Padding(
@@ -27,7 +35,7 @@ class ArticlePage extends StatelessWidget {
                 children: [
                   IconButton(
                     iconSize: 19,
-                    color: greyPrimary,
+                    color: Theme.of(context).primaryColorLight,
                     onPressed: () {
                       pop(context);
                     },
@@ -56,13 +64,13 @@ class ArticlePage extends StatelessWidget {
                   ),
                   IconButton(
                     iconSize: 19,
-                    color: greyPrimary,
+                    color: Theme.of(context).primaryColorLight,
                     onPressed: () {},
                     icon: const Icon(CustomIcons3.forward),
                   ),
                   IconButton(
                     iconSize: 19,
-                    color: greyPrimary,
+                    color: Theme.of(context).primaryColorLight,
                     onPressed: () {},
                     icon: const Icon(CustomIcons3.bookmark),
                   ),
@@ -112,7 +120,7 @@ class ArticlePage extends StatelessWidget {
                 news!.titleName,
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    color: blackPrimary,
+                    color: Theme.of(context).primaryColorDark,
                     fontSize: 20),
               ),
 
@@ -123,7 +131,7 @@ class ArticlePage extends StatelessWidget {
                 news!.authorName,
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    color: blackPrimary,
+                    color: Theme.of(context).primaryColorDark,
                     fontSize: 16),
               ),
 
@@ -132,7 +140,7 @@ class ArticlePage extends StatelessWidget {
                 'Author',
                 style: TextStyle(
                     fontWeight: FontWeight.w300,
-                    color: greyPrimary,
+                    color: Theme.of(context).primaryColorLight,
                     fontSize: 14),
               ),
 
@@ -144,7 +152,7 @@ class ArticlePage extends StatelessWidget {
                 style: TextStyle(
                     height: 1.5,
                     fontWeight: FontWeight.w300,
-                    color: greyPrimary,
+                    color: Theme.of(context).primaryColorLight,
                     fontSize: 16),
               ),
             ],

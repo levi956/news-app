@@ -20,7 +20,7 @@ class NewsData {
 
     // checking the response status of the call
     if (response.statusCode == 200) {
-      // depending on the API data, iterating and satisfying some codnitions for app to work right
+      // decode the object response into an String object
       Map<String, dynamic> responseJson = jsonDecode(response.body);
 
       List<dynamic> body = responseJson['articles'];
