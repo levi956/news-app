@@ -5,7 +5,7 @@ class Auth {
   // initializing the object
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  // getter for user
+  // getter for user object from Auth package itself
   User? get user => auth.currentUser;
 
   // sign in
@@ -13,6 +13,7 @@ class Auth {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (error) {
+      showErrorToast(error.toString());
       return;
     }
   }

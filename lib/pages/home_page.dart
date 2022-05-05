@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   Future<void> getData() async {
-    future = client.fetchNews();
+    future = client.fetchData();
     futureGeneral = clientCategory.fetchNews('general');
     futureSports = clientCategory.fetchNews('sports');
     futureTech = clientCategory.fetchNews('technology');
@@ -80,6 +80,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // browse text
                     Text(
                       'Browse',
                       style: TextStyle(
@@ -91,6 +92,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     //
 
                     const SizedBox(height: 10),
+
+                    // discover text
                     Text(
                       'Discover things of the world',
                       style: TextStyle(
@@ -99,8 +102,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           fontSize: 16),
                     ),
 
-                    //
-
+                    // tab bar
                     const SizedBox(height: 10),
                     TabBar(
                       overlayColor: MaterialStateProperty.all(transparent),
@@ -113,6 +115,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       unselectedLabelColor: Theme.of(context).primaryColorLight,
                       indicatorColor: Colors.transparent,
                       tabs: [
+                        // tabs
                         Tab(
                           child: Container(
                             margin: const EdgeInsets.only(right: 15),
@@ -208,7 +211,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       ],
                     ),
 
-                    //
+                    //tab bar view
 
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.22,
@@ -225,7 +228,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                     const SizedBox(height: 20),
 
-                    //
+                    // top news text
 
                     Text(
                       'Top News',
@@ -235,7 +238,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           fontSize: 24),
                     ),
 
-                    //
+                    // top news card
 
                     Expanded(
                       child: ListView.builder(
@@ -278,6 +281,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             },
           );
         }
+
         return const SizedBox.shrink();
       },
     );

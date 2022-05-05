@@ -55,4 +55,5 @@ class _MyAppState extends State<MyApp> {
 // - implement web view for more news content 
 
 // the socket exception class for internet connectivity 
+// proper structure for API call with a base helper class for all that sha 
 // and throwing it into the UI

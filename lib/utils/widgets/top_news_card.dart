@@ -37,6 +37,7 @@ class TopNewsCard extends StatelessWidget {
                   CachedNetworkImage(imageUrl: news!.image, fit: BoxFit.fill),
             ),
             Container(
+              width: double.maxFinite,
               padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
               color: _themeChange.darkTheme ? blackLighter : greyLighter,
               child: Text(
@@ -48,6 +49,7 @@ class TopNewsCard extends StatelessWidget {
               ),
             ),
             Container(
+              width: double.maxFinite,
               padding: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
               decoration: BoxDecoration(
                 color: _themeChange.darkTheme ? blackLighter : greyLighter,

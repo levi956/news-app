@@ -39,7 +39,7 @@ class _WrapperState extends State<Wrapper> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         selectedItemColor: purplePrimary,
         unselectedItemColor: greyPrimary,
-        iconSize: 14,
+        iconSize: 20,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         currentIndex: _currentIndex,

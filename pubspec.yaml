@@ -19,6 +19,7 @@ dependencies:
   webview_flutter: ^3.0.2
   shared_preferences: ^2.0.13
   cherry_toast: ^1.0.4
+  connectivity_plus: ^2.3.0
   provider: ^6.0.2
 
   

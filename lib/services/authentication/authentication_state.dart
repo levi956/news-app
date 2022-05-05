@@ -7,6 +7,7 @@ import '../../pages/wrapper.dart';
 class AuthState extends StatelessWidget {
   const AuthState({Key? key}) : super(key: key);
 
+  // stream that listens to user state (sign in or out)
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(

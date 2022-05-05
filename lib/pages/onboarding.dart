@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+// import 'package:http/http.dart';
 import 'package:nuntium_news_app/pages/sign_in.dart';
+import 'package:nuntium_news_app/services/network/check_connectivity.dart';
 import 'package:nuntium_news_app/utils/navigation/navigation.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/dark_theme_provider.dart';
+import '../services/network/fetch_data_exception.dart';
 import '../utils/style/status_bar_color.dart';
 
 class Onboarding extends StatefulWidget {
@@ -15,6 +18,17 @@ class Onboarding extends StatefulWidget {
 }
 
 class _OnboardingState extends State<Onboarding> {
+  @override
+  initState() {
+    // print(checkConnectivity());
+    super.initState();
+  }
+
+  // test here to see how the FetchDataException class handles
+  // Future<dynamic> _getF() {
+  //   throw FetchDataException(message: "Here ");
+  // }
+
   bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -110,6 +124,20 @@ class _OnboardingState extends State<Onboarding> {
                     ),
             ),
           ),
+
+          // exception test -- not actual part of code
+
+          // FutureBuilder(
+          //   future: _getF(),
+          //   builder: (context, snapshot) {
+          //     if (snapshot.hasData) {
+          //       return const Text('hello');
+          //     }
+
+          //     return const Text('error');
+          //     // return const Text('hello');
+          //   },
+          // )
         ],
       ),
     );

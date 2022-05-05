@@ -46,7 +46,7 @@ class BookMarks extends StatelessWidget {
                   image: AssetImage('assets/images/noBookmark.png'),
                 ),
                 radius: 33,
-                backgroundColor: Theme.of(context).primaryColorDark,
+                backgroundColor: Theme.of(context).primaryColorLight,
               ),
             ),
             const SizedBox(height: 10),

@@ -207,13 +207,6 @@ class _SignInState extends State<SignIn> {
     pop(context);
     if (user != null) {
       pushToAndClearStack(context, const Wrapper());
-    } else {
-      CherryToast.error(
-        autoDismiss: true,
-        title: const Text('Error'),
-        description: const Text('Email/Password Incorrect'),
-        animationType: ANIMATION_TYPE.fromTop,
-      ).show(context);
     }
   }
 }

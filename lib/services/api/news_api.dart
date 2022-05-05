@@ -1,72 +1,73 @@
-import 'dart:convert';
-
 import '../../models/news_model.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
+
+import 'api_base_helper.dart';
+
+final ApiBaseHelper _apiHelper = ApiBaseHelper();
 
 class NewsData {
-  String requestUrl =
-      'https://newsapi.org/v2/top-headlines?country=ng&apiKey=fae23e0131604ca99bd4b7c2fa7915c9';
+  final String _baseUrl = 'https://newsapi.org/v2/top-headlines?country=ng';
 
-  // async function that makes request to API
-  Future<List<News>> fetchNews() async {
-    // http getter that makes a call to API and response gotten
-    http.Response response = await http.get(
-      Uri.parse(requestUrl),
+  Future<List<News>> fetchData() async {
+    final _response = await _apiHelper.get(
+      url: _baseUrl,
       headers: {
         "Authorization": "fae23e0131604ca99bd4b7c2fa7915c9",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
     );
-
-    // checking the response status of the call
-    if (response.statusCode == 200) {
-      // decode the object response into an String object
-      Map<String, dynamic> responseJson = jsonDecode(response.body);
-
-      List<dynamic> body = responseJson['articles'];
-
-      List<News> articles =
-          body.map((dynamic item) => News.fromJson(item)).toList();
-
-      return articles;
-    } else {
-      throw Exception("Can't get articles");
-    }
+    return _response;
   }
 }
 
 class NewsDataCategory {
-  // creating  list object for news data
-
-  // async function that makes request to API
   Future<List<News>> fetchNews(String category) async {
-    String requestUrl =
-        'https://newsapi.org/v2/top-headlines?country=us&category=$category&apiKey=fae23e0131604ca99bd4b7c2fa7915c9';
-    // http getter that makes a call to API and response gotten
-    http.Response response = await http.get(
-      Uri.parse(requestUrl),
+    final String _baseUrl =
+        'https://newsapi.org/v2/top-headlines?country=us&category=$category';
+    final _response = await _apiHelper.get(
+      url: _baseUrl,
       headers: {
         "Authorization": "fae23e0131604ca99bd4b7c2fa7915c9",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
     );
-
-    // checking the response status of the call
-    if (response.statusCode == 200) {
-      // depending on the API data, iterating and satisfying some codnitions for app to work right
-      Map<String, dynamic> responseJson = jsonDecode(response.body);
-
-      List<dynamic> body = responseJson['articles'];
-
-      List<News> articles =
-          body.map((dynamic item) => News.fromJson(item)).toList();
-
-      return articles;
-    } else {
-      throw Exception("Can't get articles");
-    }
+    return _response;
   }
 }
+
+
+
+ // // creating  list object for news data
+
+  // // async function that makes request to API
+  // Future<List<News>> fetchNews(String category) async {
+  //   String requestUrl =
+  //       'https://newsapi.org/v2/top-headlines?country=us&category=$category&apiKey=fae23e0131604ca99bd4b7c2fa7915c9';
+  //   // http getter that makes a call to API and response gotten
+  //   http.Response response = await http.get(
+  //     Uri.parse(requestUrl),
+  //     headers: {
+  //       "Authorization": "fae23e0131604ca99bd4b7c2fa7915c9",
+  //       "Content-Type": "application/json"
+  //     },
+  //   );
+
+  //   // checking the response status of the call
+  //   if (response.statusCode == 200) {
+  //     // depending on the API data, iterating and satisfying some codnitions for app to work right
+  //     Map<String, dynamic> responseJson = jsonDecode(response.body);
+
+  //     List<dynamic> body = responseJson['articles'];
+
+  //     List<News> articles =
+  //         body.map((dynamic item) => News.fromJson(item)).toList();
+
+  //     return articles;
+  //   } else {
+  //     throw Exception("Can't get articles");
+  //   }
+  // }
+
 
 
       // responseJson['articles'].forEach((element) {
@@ -89,3 +90,34 @@ class NewsDataCategory {
       //     return newsData;
       //   }
       // });
+
+
+
+
+
+  // async function that makes request to API
+  // Future<List<News>> fetchNews() async {
+  //   // http getter that makes a call to API and response gotten
+  //   http.Response response = await http.get(
+  //     Uri.parse(requestUrl),
+  //     headers: {
+  //       "Authorization": "fae23e0131604ca99bd4b7c2fa7915c9",
+  //       "Content-Type": "application/json"
+  //     },
+  //   );
+
+  //   // checking the response status of the call
+  //   if (response.statusCode == 200) {
+  //     // decode the object response into an String object
+  //     Map<String, dynamic> responseJson = jsonDecode(response.body);
+
+  //     List<dynamic> body = responseJson['articles'];
+
+  //     List<News> articles =
+  //         body.map((dynamic item) => News.fromJson(item)).toList();
+
+  //     return articles;
+  //   } else {
+  //     throw Exception("Can't get articles");
+  //   }
+  // }
