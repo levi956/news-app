@@ -8,14 +8,24 @@ import 'package:provider/provider.dart';
 import '../models/news_model.dart';
 import '../provider/dark_theme_provider.dart';
 import '../utils/navigation/navigation.dart';
+import '../utils/shared/share_content.dart';
 import '../utils/style/status_bar_color.dart';
 
-class ArticlePage extends StatelessWidget {
+class ArticlePage extends StatefulWidget {
   final News? news;
   const ArticlePage({Key? key, this.news}) : super(key: key);
 
   @override
+  State<ArticlePage> createState() => _ArticlePageState();
+}
+
+class _ArticlePageState extends State<ArticlePage> {
+  @override
   Widget build(BuildContext context) {
+    void share() {
+      ShareContent.shareUrl(widget.news?.url.toString());
+    }
+
     // provider bool value for theme preference
     final _themeChange = Provider.of<DarkThemeProvider>(context);
     _themeChange.darkTheme
@@ -43,7 +53,8 @@ class ArticlePage extends StatelessWidget {
                   ),
                   const Spacer(),
                   InkWell(
-                    onTap: () => pushTo(context, ArticlesWeb(news: news)),
+                    onTap: () =>
+                        pushTo(context, ArticlesWeb(news: widget.news)),
                     child: Container(
                       margin: const EdgeInsets.only(right: 15),
                       width: 81,
@@ -65,7 +76,7 @@ class ArticlePage extends StatelessWidget {
                   IconButton(
                     iconSize: 19,
                     color: Theme.of(context).primaryColorLight,
-                    onPressed: () {},
+                    onPressed: share,
                     icon: const Icon(CustomIcons3.forward),
                   ),
                   IconButton(
@@ -88,7 +99,11 @@ class ArticlePage extends StatelessWidget {
                       bottomLeft: Radius.circular(15),
                       bottomRight: Radius.circular(15)),
                   child: CachedNetworkImage(
-                      imageUrl: news!.image, fit: BoxFit.fill),
+                    imageUrl: widget.news!.image,
+                    errorWidget: (context, url, widget) =>
+                        const Center(child: Icon(Icons.error)),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
 
@@ -117,7 +132,7 @@ class ArticlePage extends StatelessWidget {
 
               //news title
               Text(
-                news!.titleName,
+                widget.news!.titleName,
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: Theme.of(context).primaryColorDark,
@@ -128,7 +143,7 @@ class ArticlePage extends StatelessWidget {
 
               // author name
               Text(
-                news!.authorName,
+                widget.news!.authorName,
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: Theme.of(context).primaryColorDark,
@@ -148,7 +163,7 @@ class ArticlePage extends StatelessWidget {
 
               // content
               Text(
-                news!.contentA,
+                widget.news!.contentA,
                 style: TextStyle(
                     height: 1.5,
                     fontWeight: FontWeight.w300,

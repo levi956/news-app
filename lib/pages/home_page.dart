@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuntium_news_app/services/api/news_api.dart';
+import 'package:nuntium_news_app/services/network/check_connectivity.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
 import 'package:nuntium_news_app/utils/widgets/category_card.dart';
 import 'package:nuntium_news_app/utils/widgets/top_news_card.dart';
@@ -32,6 +33,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    // checkConnectivity();
     getData();
     super.initState();
 
