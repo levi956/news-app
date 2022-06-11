@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../models/news_model.dart';
-import '../provider/dark_theme_provider.dart';
-import '../utils/navigation/navigation.dart';
-import '../utils/style/status_bar_color.dart';
+import '../../models/news_model.dart';
+import '../../provider/dark_theme_provider.dart';
+import '../../utils/navigation/navigation.dart';
+import '../../utils/style/status_bar_color.dart';
 
 class ArticlesWeb extends StatefulWidget {
   final News? news;

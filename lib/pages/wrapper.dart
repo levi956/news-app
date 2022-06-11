@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nuntium_news_app/pages/bookmarks_page.dart';
-import 'package:nuntium_news_app/pages/categories_page.dart';
-import 'package:nuntium_news_app/pages/home_page.dart';
-import 'package:nuntium_news_app/pages/user_settings.dart';
+import 'package:nuntium_news_app/pages/core/bookmarks_page.dart';
+import 'package:nuntium_news_app/pages/core/categories_page.dart';
+import 'package:nuntium_news_app/pages/core/home_page.dart';
+import 'package:nuntium_news_app/pages/core/user_settings.dart';
 import 'package:nuntium_news_app/utils/style/custom_icons_icons.dart';
 import 'package:provider/provider.dart';
 

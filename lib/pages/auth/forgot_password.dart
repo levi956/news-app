@@ -3,13 +3,13 @@ import 'package:nuntium_news_app/utils/navigation/navigation.dart';
 import 'package:nuntium_news_app/utils/widgets/bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/dark_theme_provider.dart';
-import '../services/authentication/authentication.dart';
-import '../utils/style/color_constant.dart';
-import '../utils/style/status_bar_color.dart';
-import '../utils/widgets/buttons.dart';
-import '../utils/widgets/progress_indicator.dart';
-import '../utils/widgets/textfield.dart';
+import '../../provider/dark_theme_provider.dart';
+import '../../services/authentication/authentication.dart';
+import '../../utils/style/color_constant.dart';
+import '../../utils/style/status_bar_color.dart';
+import '../../utils/widgets/buttons.dart';
+import '../../utils/widgets/progress_indicator.dart';
+import '../../utils/widgets/textfield.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -64,12 +64,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       color: Theme.of(context).primaryColorLight,
                       fontSize: 16),
                 ),
-                const SizedBox(height: 10),
-                textField(
-                  label: 'Email Address',
-                  context: context,
+                const SizedBox(height: 30),
+                CustomTextField(
                   isHidden: false,
-                  fieldController: _email,
+                  label: 'Email Address',
+                  controller: _email,
+                  iconLabel: Icon(
+                    Icons.email,
+                    color: Theme.of(context).primaryColorLight,
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email address';
@@ -79,12 +82,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     }
                     return null;
                   },
-                  iconLabel: Icon(
-                    Icons.email,
-                    color: Theme.of(context).primaryColorLight,
-                  ),
                 ),
-                const SizedBox(height: 7),
+                const SizedBox(height: 30),
                 Center(
                   child: PurpleButton(
                       text: 'Submit',
@@ -109,17 +108,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           fontSize: 16.0,
                           fontWeight: FontWeight.w500),
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: InkWell(
-                        onTap: () => pop(context),
-                        child: Text(
-                          'Try again',
-                          style: TextStyle(
-                              color: Theme.of(context).primaryColorDark,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500),
-                        ),
+                    const SizedBox(width: 5),
+                    InkWell(
+                      onTap: () => pop(context),
+                      child: Text(
+                        'Try again',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColorDark,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500),
                       ),
                     )
                   ],

@@ -6,10 +6,10 @@ import 'package:nuntium_news_app/utils/widgets/category_card.dart';
 import 'package:nuntium_news_app/utils/widgets/top_news_card.dart';
 import 'package:provider/provider.dart';
 
-import '../models/news_model.dart';
-import '../provider/dark_theme_provider.dart';
-import '../utils/style/status_bar_color.dart';
-import '../utils/widgets/shimmer.dart';
+import '../../models/news_model.dart';
+import '../../provider/dark_theme_provider.dart';
+import '../../utils/style/status_bar_color.dart';
+import '../../utils/widgets/shimmer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

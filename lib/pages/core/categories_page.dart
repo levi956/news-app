@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../provider/dark_theme_provider.dart';
-import '../utils/style/status_bar_color.dart';
+import '../../provider/dark_theme_provider.dart';
+import '../../utils/style/status_bar_color.dart';
 
 class Categories extends StatelessWidget {
   const Categories({Key? key}) : super(key: key);

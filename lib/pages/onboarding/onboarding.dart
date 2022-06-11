@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 // import 'package:http/http.dart';
-import 'package:nuntium_news_app/pages/sign_in.dart';
+import 'package:nuntium_news_app/pages/auth/sign_in.dart';
 import 'package:nuntium_news_app/services/network/check_connectivity.dart';
 import 'package:nuntium_news_app/utils/navigation/navigation.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/dark_theme_provider.dart';
-import '../services/network/fetch_data_exception.dart';
-import '../utils/style/status_bar_color.dart';
+import '../../provider/dark_theme_provider.dart';
+import '../../services/network/fetch_data_exception.dart';
+import '../../utils/style/status_bar_color.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({Key? key}) : super(key: key);

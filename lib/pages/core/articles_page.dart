@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nuntium_news_app/pages/articles_web_page.dart';
+import 'package:nuntium_news_app/pages/web/articles_web_page.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
 import 'package:nuntium_news_app/utils/style/custom_icons_icons.dart';
 import 'package:provider/provider.dart';
 
-import '../models/news_model.dart';
-import '../provider/dark_theme_provider.dart';
-import '../utils/navigation/navigation.dart';
-import '../utils/shared/share_content.dart';
-import '../utils/style/status_bar_color.dart';
+import '../../models/news_model.dart';
+import '../../provider/dark_theme_provider.dart';
+import '../../utils/navigation/navigation.dart';
+import '../../utils/shared/share_content.dart';
+import '../../utils/style/status_bar_color.dart';
 
 class ArticlePage extends StatefulWidget {
   final News? news;

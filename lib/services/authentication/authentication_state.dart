@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../pages/onboarding.dart';
+import '../../pages/onboarding/onboarding.dart';
 import '../../pages/wrapper.dart';
 
 class AuthState extends StatelessWidget {

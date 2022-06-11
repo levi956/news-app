@@ -5,8 +5,8 @@ import 'package:nuntium_news_app/utils/widgets/buttons.dart';
 import 'package:nuntium_news_app/utils/widgets/textfield.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/dark_theme_provider.dart';
-import '../utils/style/status_bar_color.dart';
+import '../../provider/dark_theme_provider.dart';
+import '../../utils/style/status_bar_color.dart';
 
 class ChanagePassword extends StatefulWidget {
   const ChanagePassword({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class _ChanagePasswordState extends State<ChanagePassword> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
-        padding: const EdgeInsets.only(top: 70, left: 10, right: 10),
+        padding: const EdgeInsets.only(top: 70, left: 20, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -54,37 +54,37 @@ class _ChanagePasswordState extends State<ChanagePassword> {
                 ),
               ],
             ),
-            textField(
+            const SizedBox(height: 30),
+            CustomTextField(
               label: 'Current Password',
-              context: context,
               isHidden: false,
-              fieldController: _currentPassword,
-              iconLabel: Icon(
-                Icons.lock,
-                color: Theme.of(context).primaryColorLight,
-              ),
-            ),
-            textField(
-              label: 'New Password',
-              context: context,
-              isHidden: false,
-              fieldController: _newPassword,
-              iconLabel: Icon(
-                Icons.lock,
-                color: Theme.of(context).primaryColorLight,
-              ),
-            ),
-            textField(
-              label: 'Repeat New Password',
-              context: context,
-              isHidden: false,
-              fieldController: _confirmNewPassword,
+              controller: _currentPassword,
               iconLabel: Icon(
                 Icons.lock,
                 color: Theme.of(context).primaryColorLight,
               ),
             ),
             const SizedBox(height: 15),
+            CustomTextField(
+              isHidden: false,
+              label: 'Enter new password',
+              controller: _newPassword,
+              iconLabel: Icon(
+                Icons.lock,
+                color: Theme.of(context).primaryColorLight,
+              ),
+            ),
+            const SizedBox(height: 15),
+            CustomTextField(
+              isHidden: false,
+              label: 'Confrim new set password',
+              controller: _confirmNewPassword,
+              iconLabel: Icon(
+                Icons.lock,
+                color: Theme.of(context).primaryColorLight,
+              ),
+            ),
+            const SizedBox(height: 30),
             PurpleButton(
                 text: 'Change Password',
                 onPressed: () {},

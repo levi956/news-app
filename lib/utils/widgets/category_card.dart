@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nuntium_news_app/pages/articles_page.dart';
+import 'package:nuntium_news_app/pages/core/articles_page.dart';
 import 'package:nuntium_news_app/utils/navigation/navigation.dart';
 
 import '../../models/news_model.dart';

@@ -1,17 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nuntium_news_app/pages/change_password_page.dart';
-import 'package:nuntium_news_app/pages/onboarding.dart';
+import 'package:nuntium_news_app/pages/auth/change_password_page.dart';
+import 'package:nuntium_news_app/pages/onboarding/onboarding.dart';
 import 'package:nuntium_news_app/utils/navigation/navigation.dart';
 import 'package:nuntium_news_app/utils/style/custom_icons_icons.dart';
 import 'package:nuntium_news_app/utils/widgets/user_settings_listtile.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/dark_theme_provider.dart';
-import '../services/authentication/authentication.dart';
-import '../utils/style/color_constant.dart';
-import '../utils/style/status_bar_color.dart';
+import '../../provider/dark_theme_provider.dart';
+import '../../services/authentication/authentication.dart';
+import '../../utils/style/color_constant.dart';
+import '../../utils/style/status_bar_color.dart';
 
 class UserSettings extends StatefulWidget {
   const UserSettings({Key? key}) : super(key: key);
