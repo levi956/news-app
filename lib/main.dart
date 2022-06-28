@@ -51,6 +51,14 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+ 
+// new goal
+// restructre this app following the clean architecture patttern to
+// get more familiar with the architecture at centiiv
+
+
+
+
 // - getting errors because of no headers - HEADERS
 // - implement web view for more news content 
 

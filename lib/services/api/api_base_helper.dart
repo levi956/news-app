@@ -4,6 +4,8 @@
 // create a base network call helper that passes parameters to the API call
 // in simple terms, it is a mock of the API get call i wrote myself
 
+// rubbish lmao
+
 import 'dart:convert';
 import 'dart:io';
 

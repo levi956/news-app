@@ -10,8 +10,9 @@ class AuthState extends StatelessWidget {
   // stream that listens to user state (sign in or out)
   @override
   Widget build(BuildContext context) {
+    Stream<User?> userChanges = FirebaseAuth.instance.authStateChanges();
     return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
+      stream: userChanges,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return const Wrapper();

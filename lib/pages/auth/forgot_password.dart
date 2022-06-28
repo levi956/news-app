@@ -89,7 +89,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       text: 'Submit',
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          forgetpassword();
+                          _forgetpassword();
                         }
                       },
                       buttonColor: purplePrimary),
@@ -130,7 +130,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
-  forgetpassword() async {
+  _forgetpassword() async {
     showLoader(context);
     await Auth().forgotPassword(_email.text.trim());
     pop(context);

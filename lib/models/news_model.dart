@@ -8,7 +8,7 @@ class News {
   String? url;
   DateTime? publishedAt;
 
-  // this are getters
+  // these are getters
   String get authorName => author ?? '';
   String get titleName => title ?? '';
   String get descriptionName => description ?? '';

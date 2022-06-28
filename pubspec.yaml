@@ -1,7 +1,7 @@
 name: nuntium_news_app
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' 
 
 version: 1.0.0+1
 
@@ -10,6 +10,7 @@ environment:
 
 dependencies:
   http: ^0.13.4
+  dio: ^4.0.6
   shimmer: ^2.0.0
   cached_network_image: ^3.2.1
   flutter_native_splash: ^2.1.5
