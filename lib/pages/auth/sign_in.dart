@@ -14,6 +14,10 @@ import '../../provider/dark_theme_provider.dart';
 import '../../services/authentication/authentication.dart';
 import '../../utils/style/status_bar_color.dart';
 
+// enum Authstate { login, signup }
+// // use this enum to make the login/signup to be on the same page and toogle
+// // with an animated container
+
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
 
@@ -42,6 +46,13 @@ class _SignInState extends State<SignIn> {
   final _password = TextEditingController();
 
   @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     //
 
@@ -64,18 +75,20 @@ class _SignInState extends State<SignIn> {
               Text(
                 'Welcome Back 👋',
                 style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).primaryColorDark,
-                    fontSize: 24),
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).primaryColorDark,
+                  fontSize: 24,
+                ),
               ),
               const SizedBox(height: 10),
               Text(
                 'We are happy to see you again. You can\ncontinue where you left off by logging in',
                 style: TextStyle(
-                    height: 1.5,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).primaryColorLight,
-                    fontSize: 16),
+                  height: 1.5,
+                  fontWeight: FontWeight.w300,
+                  color: Theme.of(context).primaryColorLight,
+                  fontSize: 16,
+                ),
               ),
               const SizedBox(height: 30),
               CustomTextField(
@@ -119,7 +132,6 @@ class _SignInState extends State<SignIn> {
                   return null;
                 },
               ),
-
               const SizedBox(height: 30),
               Center(
                 child: PurpleButton(
@@ -132,12 +144,6 @@ class _SignInState extends State<SignIn> {
                     buttonColor: purplePrimary),
               ),
               const SizedBox(height: 15),
-              // Checkbox(
-              //   value: _themeChange.darkTheme,
-              //   onChanged: (bool? value) {
-              //     _themeChange.darkTheme = value!;
-              //   },
-              // ),
               Row(
                 children: [
                   const Spacer(),
@@ -151,7 +157,6 @@ class _SignInState extends State<SignIn> {
                       'Forgot Password?',
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          // color: greyPrimary,
                           color: _themeChange.darkTheme
                               ? backgroundWhite
                               : greyPrimary,
@@ -167,7 +172,6 @@ class _SignInState extends State<SignIn> {
                   Text(
                     'Don\'t have an account?',
                     style: TextStyle(
-                        // color: blackLighter,
                         color: _themeChange.darkTheme
                             ? backgroundWhite
                             : blackLighter,

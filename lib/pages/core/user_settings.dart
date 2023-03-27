@@ -130,6 +130,8 @@ class _UserSettingsState extends State<UserSettings> {
 
   _signOut() {
     Auth().signOut();
-    pushToAndClearStack(context, const Onboarding());
+    if (user == null) {
+      pushToAndClearStack(context, const Onboarding());
+    }
   }
 }

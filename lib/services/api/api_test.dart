@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:nuntium_news_app/models/response.dart';
+import 'package:nuntium_news_app/utils/system/constants.dart';
 
 import '../../models/news_model.dart';
 
@@ -12,20 +13,41 @@ import '../../models/news_model.dart';
 class Client {
   final Dio _dio = Dio();
 
-  // try and get a path for the url
-  final _baseUrl = 'https://newsapi.org/v2/top-headlines?country=ng';
-  Map<String, dynamic> headers = {
-    "Authorization": "fae23e0131604ca99bd4b7c2fa7915c9",
-    "Content-Type": "application/json",
-  };
-
   // get request
-  Future<ServiceResponse<List<News>>> request() async {
+  Future<ServiceResponse<List<News>>> requestNewsData() async {
     try {
       final response = await _dio.get(
-        _baseUrl,
+        Nuntium.baseUrl,
         options: Options(
-          headers: headers,
+          headers: Nuntium.headers,
+        ),
+      );
+
+      List<dynamic> body = response.data['articles'];
+      List<News> articles =
+          body.map((dynamic item) => News.fromJson(item)).toList();
+      return ServiceResponse(
+        status: true,
+        message: "success",
+        data: articles,
+      );
+    } on DioError catch (_) {
+      if (_.message.contains('SocketException')) {
+        return ServiceResponse(
+            status: false, message: "Check your connection and try again");
+      }
+      return ServiceResponse(status: false, message: _.message.toString());
+    }
+  }
+
+  // gdet request based on news category
+  Future<ServiceResponse<List<News>>> requestNewsCategory(
+      String category) async {
+    try {
+      final response = await _dio.get(
+        Nuntium.categoryUrl + category,
+        options: Options(
+          headers: Nuntium.headers,
         ),
       );
 

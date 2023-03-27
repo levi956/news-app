@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nuntium_news_app/models/response.dart';
 import 'package:nuntium_news_app/services/api/api_test.dart';
 import 'package:nuntium_news_app/services/api/news_api.dart';
-import 'package:nuntium_news_app/services/network/check_connectivity.dart';
 import 'package:nuntium_news_app/utils/style/color_constant.dart';
 import 'package:nuntium_news_app/utils/widgets/category_card.dart';
 import 'package:nuntium_news_app/utils/widgets/top_news_card.dart';
@@ -25,15 +24,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late TabController _tabController;
   int currentIndex = 0;
 
-  // NewsData client = NewsData();
   Client client = Client();
   NewsDataCategory clientCategory = NewsDataCategory();
 
   late Future<ServiceResponse<List<News>>> newsData;
-  late Future<List<News>> futureGeneral;
-  late Future<List<News>> futureSports;
-  late Future<List<News>> futureTech;
-  late Future<List<News>> futureBusiness;
+  late Future<ServiceResponse<List<News>>> general;
+  late Future<ServiceResponse<List<News>>> sports;
+  late Future<ServiceResponse<List<News>>> tech;
+  late Future<ServiceResponse<List<News>>> business;
 
   @override
   void initState() {
@@ -53,11 +51,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   Future<void> getData() async {
-    newsData = client.request();
-    futureGeneral = clientCategory.fetchNews('general');
-    futureSports = clientCategory.fetchNews('sports');
-    futureTech = clientCategory.fetchNews('technology');
-    futureBusiness = clientCategory.fetchNews('business');
+    newsData = client.requestNewsData();
+    general = client.requestNewsCategory('general');
+    sports = client.requestNewsCategory('sports');
+    tech = client.requestNewsCategory('technology');
+    business = client.requestNewsCategory('business');
     setState(() {});
   }
 
@@ -125,10 +123,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           physics: const NeverScrollableScrollPhysics(),
                           controller: _tabController,
                           children: [
-                            futureCategory(futureGeneral),
-                            futureCategory(futureSports),
-                            futureCategory(futureTech),
-                            futureCategory(futureBusiness),
+                            futureCategory(general),
+                            futureCategory(sports),
+                            futureCategory(tech),
+                            futureCategory(business),
                           ],
                         ),
                       ),
@@ -166,9 +164,24 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           } else {
             // properly display the error widget here
             return Container(
-              color: Colors.white,
-              child: Center(
-                child: Text(articles.message!),
+              width: double.maxFinite,
+              color: Theme.of(context).scaffoldBackgroundColor,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.warning,
+                    color: Colors.red,
+                    size: 25.0,
+                  ),
+                  const SizedBox(height: 15),
+                  Text(
+                    articles.message!,
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColorDark,
+                    ),
+                  ),
+                ],
               ),
             );
           }
@@ -179,29 +192,37 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   // future builder that returns data from api call future
-  FutureBuilder<List<News>> futureCategory(Future<List<News>> category) {
-    return FutureBuilder<List<News>>(
+  FutureBuilder<dynamic> futureCategory(Future category) {
+    return FutureBuilder<dynamic>(
       future: category,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<News> articles = snapshot.data!;
-          return ListView.builder(
-            itemCount: articles.length,
-            scrollDirection: Axis.horizontal,
-            physics: const AlwaysScrollableScrollPhysics(),
-            itemBuilder: (context, int index) {
-              return TabsCard(
-                news: articles[index],
-              );
-            },
-          );
+          ServiceResponse<List<News>> response = snapshot.data!;
+          if (response.status != false) {
+            // get data here
+            List<News>? articles = response.data;
+            return ListView.builder(
+              itemCount: articles!.length,
+              scrollDirection: Axis.horizontal,
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemBuilder: (context, int index) {
+                return TabsCard(
+                  news: articles[index],
+                );
+              },
+            );
+          } else {
+            // throw error here
+            return Container(
+              color: Colors.white,
+              child: Center(
+                child: Text(response.message!),
+              ),
+            );
+          }
         }
-
         return const SizedBox.shrink();
       },
     );
   }
-
-  //
-
 }
